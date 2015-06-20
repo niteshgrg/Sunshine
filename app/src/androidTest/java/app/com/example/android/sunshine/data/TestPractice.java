@@ -1,4 +1,4 @@
-package com.example.android.sunshine.app.data;
+package app.com.example.android.sunshine.data;
 
 import android.test.AndroidTestCase;
 
@@ -6,6 +6,10 @@ public class TestPractice extends AndroidTestCase {
     /*
         This gets run before every test.
      */
+
+    public TestPractice() {
+
+    }
     @Override
     protected void setUp() throws Exception {
         super.setUp();
