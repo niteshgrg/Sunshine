@@ -1,13 +1,10 @@
 package app.com.example.android.sunshine;
 
 import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.widget.ShareActionProvider;
 
 
 public class DetailsActivity extends ActionBarActivity {
@@ -18,8 +15,14 @@ public class DetailsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         if (savedInstanceState == null) {
+
+            Bundle args = new Bundle();
+            args.putParcelable(DetailsActivityFragment.DETAIL_URI, getIntent().getData());
+
+            DetailsActivityFragment fragment = new DetailsActivityFragment();
+            fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailsActivityFragment())
+                    .add(R.id.weather_detail_container, fragment)
                     .commit();
         }
     }
