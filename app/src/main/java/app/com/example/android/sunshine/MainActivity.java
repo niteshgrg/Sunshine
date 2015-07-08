@@ -4,9 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import app.com.example.android.sunshine.sync.SunshineSyncAdapter;
 
 
 public class MainActivity extends ActionBarActivity implements forecastFragment.Callback {
@@ -24,18 +25,24 @@ public class MainActivity extends ActionBarActivity implements forecastFragment.
         setContentView(R.layout.activity_main);
 
         if (findViewById(R.id.weather_detail_container) != null) {
-
             mTwoPane = true;
 
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.weather_detail_container, new DetailsActivityFragment(), DETAILFRAGMENT_TAG)
                         .commit();
-                Log.d(LOG_TAG, "commiting in detail activity");
             }
         } else {
             mTwoPane = false;
         }
+
+        forecastFragment forecastFragment = ((forecastFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_forecast));
+        forecastFragment.setUseTodayLayout(!mTwoPane);
+        if (mTwoPane == false) {
+            getSupportActionBar().setElevation(0f);
+        }
+
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
@@ -93,4 +100,6 @@ public class MainActivity extends ActionBarActivity implements forecastFragment.
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -6,7 +6,5 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:name="app.com.example.android.sunshine.forecastFragment"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
     tools:context="app.com.example.android.sunshine.forecastFragment"
     tools:layout="@android:layout/list_content" />

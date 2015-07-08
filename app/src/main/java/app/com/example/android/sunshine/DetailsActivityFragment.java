@@ -112,7 +112,7 @@ public class DetailsActivityFragment extends Fragment implements LoaderManager.L
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflatar) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
+        menuInflatar.inflate(R.menu.menu_details, menu);
         // Locate MenuItem with ShareActionProvider
         MenuItem menuItem = menu.findItem(R.id.menu_item_share);
 
@@ -121,7 +121,6 @@ public class DetailsActivityFragment extends Fragment implements LoaderManager.L
         if (mForecastStr != null) {
             mShareActionProvider.setShareIntent(createShareForecastIntent());
         }
-        super.onCreateOptionsMenu(menu, menuInflatar);
     }
 
     private Intent createShareForecastIntent() {
@@ -186,12 +185,13 @@ public class DetailsActivityFragment extends Fragment implements LoaderManager.L
             String description = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(description);
 
-            boolean isMetric = Utility.isMetric(getActivity());
+            mIconView.setContentDescription(description);
 
-            String high = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MAX_TEMP), isMetric);
+
+            String high = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MAX_TEMP));
             mHighTempView.setText(high);
 
-            String low = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MIN_TEMP), isMetric);
+            String low = Utility.formatTemperature(getActivity(), data.getDouble(COL_WEATHER_MIN_TEMP));
             mLowTempView.setText(low);
 
             float humidity = data.getFloat(COL_WEATHER_HUMIDITY);
